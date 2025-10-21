@@ -3,10 +3,8 @@ import { TaxCalculationData, TaxCalculationResult } from "./types"
 export type TaxCalculationInput = TaxCalculationData
 
 function calculateEmploymentIncomeDeduction(annualIncome: number): number {
-  if (annualIncome <= 1625000) {
-    return 550000
-  } else if (annualIncome <= 1800000) {
-    return annualIncome * 0.4 - 100000
+  if (annualIncome <= 1900000) {
+    return 650000
   } else if (annualIncome <= 3600000) {
     return annualIncome * 0.3 + 80000
   } else if (annualIncome <= 6600000) {
@@ -18,17 +16,48 @@ function calculateEmploymentIncomeDeduction(annualIncome: number): number {
   }
 }
 
-function calculateBasicDeduction(): number {
-  return 480000
+function calculateBasicDeduction(grossIncome: number): number {
+  if (grossIncome <= 2400000) {
+    return 480000
+  } else if (grossIncome <= 2450000) {
+    return 320000
+  } else if (grossIncome <= 2500000) {
+    return 160000
+  } else {
+    return 0
+  }
 }
 
 function calculateSpouseDeduction(spouseIncome: number): number {
-  if (spouseIncome <= 1030000) {
-    return 380000
-  } else if (spouseIncome <= 1130000) {
-    const ratio = (1130000 - spouseIncome) / 100000
-    return Math.floor(380000 * ratio)
+  if (spouseIncome === 0) {
+    return 0
   }
+  
+  const spouseEmploymentDeduction = calculateEmploymentIncomeDeduction(spouseIncome)
+  const spouseGrossIncome = spouseIncome - spouseEmploymentDeduction
+  
+  if (spouseGrossIncome <= 480000) {
+    return 380000
+  } else if (spouseGrossIncome <= 950000) {
+    return 380000
+  } else if (spouseGrossIncome <= 1000000) {
+    return 360000
+  } else if (spouseGrossIncome <= 1050000) {
+    return 310000
+  } else if (spouseGrossIncome <= 1100000) {
+    return 260000
+  } else if (spouseGrossIncome <= 1150000) {
+    return 210000
+  } else if (spouseGrossIncome <= 1200000) {
+    return 160000
+  } else if (spouseGrossIncome <= 1250000) {
+    return 110000
+  } else if (spouseGrossIncome <= 1300000) {
+    return 60000
+  } else if (spouseGrossIncome <= 1330000) {
+    return 30000
+  }
+  
   return 0
 }
 
@@ -36,11 +65,11 @@ function calculateDependentDeduction(
   dependents: number,
   dependentsOver70: number
 ): number {
-  return dependents * 380000 + dependentsOver70 * 580000
+  return dependents * 380000 + dependentsOver70 * 480000
 }
 
-function calculateSocialInsuranceDeduction(grossIncome: number): number {
-  return Math.floor(grossIncome * 0.15)
+function calculateSocialInsuranceDeduction(annualIncome: number): number {
+  return Math.floor(annualIncome * 0.1459)
 }
 
 function calculateLifeInsuranceDeduction(amount: number): number {
@@ -48,6 +77,8 @@ function calculateLifeInsuranceDeduction(amount: number): number {
     return amount
   } else if (amount <= 40000) {
     return Math.floor(amount / 2) + 10000
+  } else if (amount <= 80000) {
+    return Math.floor(amount / 4) + 20000
   } else {
     return 40000
   }
@@ -83,14 +114,14 @@ export function calculateYearEndAdjustment(
   )
   const grossIncome = input.annualIncome - employmentIncomeDeduction
 
-  const basicDeduction = calculateBasicDeduction()
+  const basicDeduction = calculateBasicDeduction(grossIncome)
   const spouseDeduction = calculateSpouseDeduction(input.spouseIncome)
   const dependentDeduction = calculateDependentDeduction(
     input.dependents,
     input.dependentsOver70
   )
   const socialInsuranceDeduction =
-    calculateSocialInsuranceDeduction(grossIncome)
+    calculateSocialInsuranceDeduction(input.annualIncome)
   const lifeInsuranceDeduction = calculateLifeInsuranceDeduction(
     input.lifeInsurance
   )
@@ -113,7 +144,7 @@ export function calculateYearEndAdjustment(
 
   incomeTax = Math.max(0, incomeTax - input.housingLoanCredit)
 
-  const estimatedWithheldTax = Math.floor(input.annualIncome * 0.05)
+  const estimatedWithheldTax = Math.floor(input.annualIncome * 0.1021)
   const yearEndAdjustment = estimatedWithheldTax - incomeTax
 
   return {
