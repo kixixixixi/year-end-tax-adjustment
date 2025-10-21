@@ -53,6 +53,14 @@ const Page: FC = () => {
 
       <Section title={SECTION_TITLES.DEDUCTIONS}>
         <InputField
+          id="socialInsurance"
+          label={FORM_FIELDS.DEDUCTIONS.socialInsurance.label}
+          value={formData.socialInsurance}
+          onChange={(value) => updateField("socialInsurance", value)}
+          placeholder={FORM_FIELDS.DEDUCTIONS.socialInsurance.placeholder}
+        />
+
+        <InputField
           id="lifeInsurance"
           label={FORM_FIELDS.DEDUCTIONS.lifeInsurance.label}
           value={formData.lifeInsurance}

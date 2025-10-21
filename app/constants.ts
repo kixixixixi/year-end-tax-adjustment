@@ -18,6 +18,10 @@ export const FORM_FIELDS = {
     },
   },
   DEDUCTIONS: {
+    socialInsurance: {
+      label: "社会保険料控除（円）",
+      placeholder: "例: 720000",
+    },
     lifeInsurance: {
       label: "生命保険料控除（円）",
       placeholder: "例: 40000",

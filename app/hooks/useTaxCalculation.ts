@@ -7,6 +7,7 @@ const initialFormData: TaxCalculationData = {
   spouseIncome: 0,
   dependents: 0,
   dependentsOver70: 0,
+  socialInsurance: 0,
   lifeInsurance: 0,
   earthquakeInsurance: 0,
   smallBusinessMutual: 0,

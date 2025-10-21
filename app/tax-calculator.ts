@@ -68,8 +68,8 @@ function calculateDependentDeduction(
   return dependents * 380000 + dependentsOver70 * 480000
 }
 
-function calculateSocialInsuranceDeduction(annualIncome: number): number {
-  return Math.floor(annualIncome * 0.1459)
+function calculateSocialInsuranceDeduction(socialInsuranceAmount: number): number {
+  return socialInsuranceAmount
 }
 
 function calculateLifeInsuranceDeduction(amount: number): number {
@@ -121,7 +121,7 @@ export function calculateYearEndAdjustment(
     input.dependentsOver70
   )
   const socialInsuranceDeduction =
-    calculateSocialInsuranceDeduction(input.annualIncome)
+    calculateSocialInsuranceDeduction(input.socialInsurance)
   const lifeInsuranceDeduction = calculateLifeInsuranceDeduction(
     input.lifeInsurance
   )
