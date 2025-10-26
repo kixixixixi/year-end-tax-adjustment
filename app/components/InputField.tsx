@@ -17,6 +17,13 @@ export const InputField: React.FC<InputFieldProps> = ({
   placeholder,
   type = "number",
 }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value.replace(/,/g, "")
+    onChange(Number(rawValue))
+  }
+
+  const displayValue = value ? value.toLocaleString() : ""
+
   return (
     <div style={{ marginBottom: "1rem" }}>
       <label 
@@ -32,7 +39,7 @@ export const InputField: React.FC<InputFieldProps> = ({
       </label>
       <input
         id={id}
-        type={type}
+        type="text"
         style={{
           border: "1px solid #d1d5db",
           borderRadius: "0.375rem",
@@ -40,8 +47,8 @@ export const InputField: React.FC<InputFieldProps> = ({
           padding: "0.75rem",
           width: "100%",
         }}
-        value={value || ""}
-        onChange={(e) => onChange(Number(e.target.value))}
+        value={displayValue}
+        onChange={handleChange}
         placeholder={placeholder}
       />
     </div>
