@@ -3,14 +3,16 @@ import { TaxCalculationData, TaxCalculationResult } from "./types"
 export type TaxCalculationInput = TaxCalculationData
 
 function calculateEmploymentIncomeDeduction(annualIncome: number): number {
-  if (annualIncome <= 1900000) {
-    return 650000
+  if (annualIncome <= 1625000) {
+    return 550000
+  } else if (annualIncome <= 1800000) {
+    return Math.floor(annualIncome * 0.4 - 100000)
   } else if (annualIncome <= 3600000) {
-    return annualIncome * 0.3 + 80000
+    return Math.floor(annualIncome * 0.3 + 80000)
   } else if (annualIncome <= 6600000) {
-    return annualIncome * 0.2 + 440000
+    return Math.floor(annualIncome * 0.2 + 440000)
   } else if (annualIncome <= 8500000) {
-    return annualIncome * 0.1 + 1100000
+    return Math.floor(annualIncome * 0.1 + 1100000)
   } else {
     return 1950000
   }
@@ -144,8 +146,7 @@ export function calculateYearEndAdjustment(
 
   incomeTax = Math.max(0, incomeTax - input.housingLoanCredit)
 
-  const estimatedWithheldTax = Math.floor(input.annualIncome * 0.1021)
-  const yearEndAdjustment = estimatedWithheldTax - incomeTax
+  const yearEndAdjustment = input.withheldTax - incomeTax
 
   return {
     grossIncome,

@@ -97,6 +97,14 @@ const Page: FC = () => {
           onChange={(value) => updateField("housingLoanCredit", value)}
           placeholder={FORM_FIELDS.DEDUCTIONS.housingLoanCredit.placeholder}
         />
+
+        <InputField
+          id="withheldTax"
+          label={FORM_FIELDS.DEDUCTIONS.withheldTax.label}
+          value={formData.withheldTax}
+          onChange={(value) => updateField("withheldTax", value)}
+          placeholder={FORM_FIELDS.DEDUCTIONS.withheldTax.placeholder}
+        />
       </Section>
 
       <button style={{

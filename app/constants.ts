@@ -38,6 +38,10 @@ export const FORM_FIELDS = {
       label: "住宅借入金等特別控除（円）",
       placeholder: "例: 200,000",
     },
+    withheldTax: {
+      label: "源泉徴収税額（円）",
+      placeholder: "例: 500,000",
+    },
   },
 } as const
 

@@ -8,6 +8,7 @@ export type TaxCalculationData = {
   earthquakeInsurance: number
   smallBusinessMutual: number
   housingLoanCredit: number
+  withheldTax: number
 }
 
 export type TaxCalculationResult = {

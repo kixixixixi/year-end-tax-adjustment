@@ -12,6 +12,7 @@ const initialFormData: TaxCalculationData = {
   earthquakeInsurance: 0,
   smallBusinessMutual: 0,
   housingLoanCredit: 0,
+  withheldTax: 0,
 }
 
 export const useTaxCalculation = () => {
