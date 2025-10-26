@@ -37,7 +37,7 @@ export const SocialInsuranceEstimator: React.FC<SocialInsuranceEstimatorProps> =
     { value: "default", label: "その他（全国平均）" },
   ]
 
-  const updateField = (field: keyof SocialInsuranceInput, value: any) => {
+  const updateField = (field: keyof SocialInsuranceInput, value: number | string | boolean) => {
     setEstimatorData(prev => ({ ...prev, [field]: value }))
   }
 
@@ -152,15 +152,19 @@ export const SocialInsuranceEstimator: React.FC<SocialInsuranceEstimatorProps> =
             marginBottom: "1rem",
           }}>
             <div>
-              <label style={{
-                color: "#374151",
-                display: "block",
-                fontWeight: "600",
-                marginBottom: "0.5rem",
-              }}>
+              <label 
+                htmlFor="prefecture"
+                style={{
+                  color: "#374151",
+                  display: "block",
+                  fontWeight: "600",
+                  marginBottom: "0.5rem",
+                }}
+              >
                 都道府県
               </label>
               <select
+                id="prefecture"
                 style={{
                   border: "1px solid #d1d5db",
                   borderRadius: "0.375rem",
@@ -188,20 +192,24 @@ export const SocialInsuranceEstimator: React.FC<SocialInsuranceEstimatorProps> =
             />
 
             <div>
-              <label style={{
+              <span style={{
                 color: "#374151",
                 display: "block",
                 fontWeight: "600",
                 marginBottom: "0.5rem",
               }}>
                 雇用保険
-              </label>
-              <label style={{
-                alignItems: "center",
-                display: "flex",
-                gap: "0.5rem",
-              }}>
+              </span>
+              <label 
+                htmlFor="hasEmploymentInsurance"
+                style={{
+                  alignItems: "center",
+                  display: "flex",
+                  gap: "0.5rem",
+                }}
+              >
                 <input
+                  id="hasEmploymentInsurance"
                   type="checkbox"
                   checked={estimatorData.hasEmploymentInsurance}
                   onChange={(e) => updateField("hasEmploymentInsurance", e.target.checked)}

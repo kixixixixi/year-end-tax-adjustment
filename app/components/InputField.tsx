@@ -15,7 +15,7 @@ export const InputField: React.FC<InputFieldProps> = ({
   value,
   onChange,
   placeholder,
-  type = "number",
+  type: _type = "number",
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value.replace(/,/g, "")
