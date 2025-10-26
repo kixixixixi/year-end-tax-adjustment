@@ -12,9 +12,21 @@ export type TaxCalculationData = {
 }
 
 export type TaxCalculationResult = {
+  employmentIncomeDeduction: number
   grossIncome: number
+  basicDeduction: number
+  spouseDeduction: number
+  dependentDeduction: number
+  socialInsuranceDeduction: number
+  lifeInsuranceDeduction: number
+  earthquakeInsuranceDeduction: number
+  smallBusinessMutual: number
   totalDeductions: number
   taxableIncome: number
+  baseIncomeTax: number
+  incomeTaxAfterHousing: number
+  reconstructionTax: number
   incomeTax: number
+  withheldTax: number
   yearEndAdjustment: number
 }
