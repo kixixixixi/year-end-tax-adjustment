@@ -4,6 +4,7 @@ import React, { FC } from "react"
 import { InputField } from "./components/InputField"
 import { Section } from "./components/Section"
 import { ResultDisplay } from "./components/ResultDisplay"
+import { SocialInsuranceEstimator } from "./components/SocialInsuranceEstimator"
 import { useTaxCalculation } from "./hooks/useTaxCalculation"
 import { FORM_FIELDS, SECTION_TITLES } from "./constants"
 
@@ -52,6 +53,11 @@ const Page: FC = () => {
       </Section>
 
       <Section title={SECTION_TITLES.DEDUCTIONS}>
+        <SocialInsuranceEstimator
+          annualIncome={formData.annualIncome}
+          onEstimatedAmountChange={(amount) => updateField("socialInsurance", amount)}
+        />
+        
         <InputField
           id="socialInsurance"
           label={FORM_FIELDS.DEDUCTIONS.socialInsurance.label}
